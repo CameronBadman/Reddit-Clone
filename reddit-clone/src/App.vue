@@ -20,6 +20,7 @@
 
     <q-page-container>
       <router-view />
+      <RedditPosts />
     </q-page-container>
 
     <q-footer bordered class="bg-grey-8 text-white">
@@ -38,10 +39,18 @@
 
 <script>
 import { ref } from 'vue'
+import RedditPosts from './containers/RedditPosts.vue';
+
 
 
 export default {
+  components: {
+    RedditPosts
+  },
+  
+
   setup () {
+    
     const leftDrawerOpen = ref(false)
     
 
