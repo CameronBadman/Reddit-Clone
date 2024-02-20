@@ -1,26 +1,56 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <q-layout view="hhh LpR fFf">
+
+    <q-header reveal bordered class="bg-primary text-white">
+      <q-toolbar>
+        <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
+
+        <q-toolbar-title>
+          <q-avatar>
+            <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg">
+          </q-avatar>
+          Reddit Clone
+        </q-toolbar-title>
+      </q-toolbar>
+    </q-header>
+
+    <q-drawer show-if-above v-model="leftDrawerOpen" side="left" behavior="desktop" bordered>
+      <!-- drawer content -->
+    </q-drawer>
+
+    <q-page-container>
+      <router-view />
+    </q-page-container>
+
+    <q-footer bordered class="bg-grey-8 text-white">
+      <q-toolbar>
+        <q-toolbar-title>
+          <q-avatar>
+            <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg">
+          </q-avatar>
+         
+        </q-toolbar-title>
+      </q-toolbar>
+    </q-footer>
+
+  </q-layout>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import { ref } from 'vue'
+
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  setup () {
+    const leftDrawerOpen = ref(false)
+    
+
+    return {
+      leftDrawerOpen,
+      toggleLeftDrawer () {
+        leftDrawerOpen.value = !leftDrawerOpen.value
+      }
+    }
   }
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
