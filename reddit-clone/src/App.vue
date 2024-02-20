@@ -20,7 +20,7 @@
 
     <q-page-container>
       <router-view />
-      <RedditPosts />
+      <RedditPosts subreddit ="aww"/>
     </q-page-container>
 
     <q-footer bordered class="bg-grey-8 text-white">

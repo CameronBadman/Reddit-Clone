@@ -19,7 +19,7 @@ async function getHotRedditPosts(subreddit) {
                 if (post.media.type === 'image') {
                     mediaInfo = {
                         type: 'image',
-                        url: post.media.content ? post.media.content : post.media.reddit_video.fallback_url
+                        url: post.media.content ? post.media.content : post.url
                     };
                 } else if (post.media.type === 'video') {
                     mediaInfo = {
@@ -27,6 +27,12 @@ async function getHotRedditPosts(subreddit) {
                         url: post.media.reddit_video.fallback_url
                     };
                 }
+            } else if (post.is_video) {
+                // If the post is a video but media information is not available
+                mediaInfo = {
+                    type: 'video',
+                    url: post.url
+                };
             }
 
             return {
@@ -46,5 +52,8 @@ async function getHotRedditPosts(subreddit) {
         return [];
     }
 }
+
+module.exports = getHotRedditPosts;
+
 
 module.exports = getHotRedditPosts;

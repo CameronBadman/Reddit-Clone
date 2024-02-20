@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Hot Reddit Posts</h1>
+    <h1>🔥🔥Hot Reddit on r/{{ subreddit }}</h1>
     <div class="post-list">
       <post-card v-for="(post, index) in redditPosts" :key="index" :post="post" />
     </div>
@@ -8,10 +8,17 @@
 </template>
 
 <script>
+
 import PostCard from '../components/PostCard.vue';
-import getHotRedditPosts from '../api/reddit_api'; // Assuming getHotRedditPosts.js is in the same directory
+import getHotRedditPosts from '../api/reddit_api';
 
 export default {
+  props: {
+    subreddit: {
+      type: String,
+      required: true
+    }
+  },
   components: {
     PostCard
   },
@@ -22,14 +29,14 @@ export default {
   },
   async mounted() {
     try {
-      const subreddit = 'aww'; // Replace 'YOUR_SUBREDDIT_NAME' with the subreddit you want to fetch posts from
-      this.redditPosts = await getHotRedditPosts(subreddit);
+      this.redditPosts = await getHotRedditPosts(this.subreddit);
     } catch (error) {
       console.error('Error fetching Reddit posts:', error);
     }
   }
 };
 </script>
+
 
 <style scoped>
 .post-list {
