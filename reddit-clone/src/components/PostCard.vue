@@ -1,21 +1,17 @@
 <template>
   <div class="post-card">
-    <h3>{{ post.title }}</h3>
-    <p>Score: {{ post.score }}</p>
-    <p>Number of Comments: {{ post.comments_count }}</p>
-    <p>Author: {{ post.author }}</p>
-    <div>
-      <div v-if="post.url">
-        <p>Media Type: {{ getMediaType(post.url) }}</p>
-        <div v-if="isImage(post.url)">
-          <img class="media" :src="post.url" alt="Post Image" />
-        </div>
-        <div v-else-if="isVideo(post.url)">
-          <video class="media" controls :src="post.url" alt="Post Video"></video>
-        </div>
-        <div v-else>
-          <p>No media available for this post</p>
-        </div>
+    <div class="post-content">
+      <h3>{{ post.title }}</h3>
+      <p>Score: {{ post.score }}</p>
+      <p>Number of Comments: {{ post.comments_count }}</p>
+      <p>Author: {{ post.author }}</p>
+    </div>
+    <div class="media-container">
+      <div v-if="post.url && isImage(post.url)">
+        <img class="media" :src="post.url" alt="Post Image" />
+      </div>
+      <div v-else>
+        <img class="media" src="/NoImage.jpeg" alt="No Image Available" />
       </div>
     </div>
   </div>
@@ -30,22 +26,9 @@ export default {
     }
   },
   methods: {
-    getMediaType(url) {
-      if (this.isImage(url)) {
-        return 'image';
-      } else if (this.isVideo(url)) {
-        return 'video';
-      } else {
-        return 'unknown';
-      }
-    },
     isImage(url) {
       // Check if the URL ends with common image extensions
       return /\.(jpeg|jpg|gif|png)$/i.test(url);
-    },
-    isVideo(url) {
-      // Check if the URL ends with common video extensions
-      return /\.(mp4|webm|ogg)$/i.test(url);
     }
   }
 };
@@ -53,13 +36,23 @@ export default {
 
 <style scoped>
 .post-card {
+  display: flex; /* Use flexbox layout */
+  align-items: flex-start; /* Align items to the start of the flex container */
   margin-bottom: 20px;
   padding: 10px;
   border: 1px solid #ccc;
 }
 
+.post-content {
+  flex: 1; /* Allow the content to take up remaining space */
+}
+
+.media-container {
+  margin-left: 10px; /* Add some space between content and image */
+}
+
 .media {
-  max-width: 100%;
+  max-width: 150px; /* Limit the width of the image */
   height: auto;
 }
 </style>

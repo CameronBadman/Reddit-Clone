@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>🔥🔥Hot Reddit on r/{{ subreddit }}</h1>
+    <h1>🔥🔥Hot Posts on r/{{ subreddit }}</h1>
     <div class="post-list">
       <post-card v-for="(post, index) in redditPosts" :key="index" :post="post" />
     </div>

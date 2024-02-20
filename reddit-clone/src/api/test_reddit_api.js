@@ -13,11 +13,11 @@ async function testGetHotRedditPosts() {
             console.log(`Number of Comments: ${post.comments_count}`);
             console.log(`Author: ${post.author}`);
             console.log(`Created UTC: ${new Date(post.created_utc * 1000)}`);
-            if (post.media) {
-                console.log('Media:');
-                console.log(`Type: ${post.media.type}`);
-                console.log(`URL: ${post.media.url}`);
-            }
+            
+            console.log('Media:');
+            console.log(`Type: ${post.media.type}`);
+            console.log(`URL: ${post.media.url}`);
+            
             console.log('---------------------');
         });
     } catch (error) {
