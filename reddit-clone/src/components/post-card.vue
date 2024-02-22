@@ -26,9 +26,9 @@
   </template>
   
   <script>
-  import MediaDisplay from './PostCard_Componants/MediaDisplay.vue';
-  import CommentSection from './PostCard_Componants/CommentSection.vue';
-  import PostMetadata from './PostCard_Componants/PostMetadata.vue';
+  import MediaDisplay from './PostCard_Componants/media-display.vue';
+  import CommentSection from './PostCard_Componants/comment-section.vue';
+  import PostMetadata from './PostCard_Componants/post-metadata.vue';
   
   export default {
     components: {

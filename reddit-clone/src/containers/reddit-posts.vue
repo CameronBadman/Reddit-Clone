@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import PostCard from '../components/PostCard.vue';
+import PostCard from '../components/post-card.vue';
 import { getHotRedditPosts } from '../api/reddit_api';
 import { ref } from 'vue';
 
@@ -30,9 +30,16 @@ export default {
     components: {
         PostCard
     },
+
+    mounted() {
+            console.log('Subreddit:', "test");
+        },
+
     setup(props) {
         const redditPosts = ref([]);
         let loading = false; // Flag to prevent multiple concurrent requests
+
+        
 
         const loadMorePosts = async (index, done) => {
             if (loading) return; // Prevent concurrent requests
@@ -53,6 +60,8 @@ export default {
                 done(); // Signal that loading is complete
             }
         };
+
+        
 
         return {
             redditPosts,
