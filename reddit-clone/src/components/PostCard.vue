@@ -1,34 +1,62 @@
 <template>
-  <div class="post-card">
-    <div class="post-content">
-      <h3>{{ post.title }}</h3>
-      <p>Score: {{ post.score }}</p>
-      <p>Number of Comments: {{ post.comments_count }}</p>
-      <p>Author: {{ post.author }}</p>
-    </div>
-    <div class="media-container">
-      <div v-if="post.url && isImage(post.url)">
-        <img class="media" :src="post.url" alt="Post Image" />
+  <q-card class="post-card" @click="expandCard">
+    <div class="post-content" @mouseenter="showHover" @mouseleave="hideHover">
+      <div class="text-content">
+        <q-item>
+          <q-item-section>
+            <q-item-label class="text-h6">{{ post.title }}</q-item-label>
+            <q-item-label class="text-body">Number of Comments: {{ post.num_comments }}</q-item-label>
+            <q-item-label class="text-body">Author: {{ post.author }}</q-item-label>
+            <q-item-label v-if="post.content" class="text-body">{{ post.content }}</q-item-label>
+            <q-item-label  class="text-body">{{ post.url }}</q-item-label>
+          </q-item-section>
+        </q-item>
+        <div v-if="hovered" class="hover-highlight">
+          <q-icon name="arrow_downward" class="arrow-icon" @click.stop="expandCard"/>
+        </div>
       </div>
-      <div v-else>
-        <img class="media" src="/NoImage.jpeg" alt="No Image Available" />
-      </div>
+      <q-card-section class="image-section">
+        <template v-if="post.thumbnail !== 'self' && (post.thumbnail || post.media_metadata || post.media)">
+          <MediaDisplay :media="{
+            'thumbnail': post.thumbnail,
+            'media_metadata': post.media_metadata, 
+            'media': post.media
+          }"/>
+        </template>
+      </q-card-section>
     </div>
-  </div>
+  </q-card>
 </template>
 
 <script>
+import MediaDisplay from '@/components/MediaDisplay.vue'; 
+
 export default {
+  components: {
+    MediaDisplay 
+  },
   props: {
     post: {
       type: Object,
       required: true
     }
   },
+  data() {
+    return {
+      hovered: false
+    };
+  },
   methods: {
-    isImage(url) {
-      // Check if the URL ends with common image extensions
-      return /\.(jpeg|jpg|gif|png)$/i.test(url);
+    showHover() {
+      this.hovered = true;
+    },
+    hideHover() {
+      this.hovered = false;
+    },
+    expandCard() {
+      // Implement the logic to expand the card
+      // For example, emit an event to notify the parent component
+      this.$emit('expand');
     }
   }
 };
@@ -36,23 +64,34 @@ export default {
 
 <style scoped>
 .post-card {
-  display: flex; /* Use flexbox layout */
-  align-items: flex-start; /* Align items to the start of the flex container */
   margin-bottom: 20px;
-  padding: 10px;
   border: 1px solid #ccc;
+  position: relative; /* Required for absolute positioning of hover highlight */
 }
 
 .post-content {
-  flex: 1; /* Allow the content to take up remaining space */
+  display: flex;
 }
 
-.media-container {
-  margin-left: 10px; /* Add some space between content and image */
+.text-content {
+  flex: 1;
 }
 
-.media {
-  max-width: 150px; /* Limit the width of the image */
-  height: auto;
+.hover-highlight {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(50, 50, 50, 0.9); /* Dark grey color */
+  padding: 5px 0;
+  text-align: center;
+  cursor: pointer;
+  z-index: 999; /* Higher z-index to make it appear above other elements */
 }
+
+.arrow-icon {
+  font-size: 24px;
+  color: #fff; /* White color for arrow icon */
+}
+
 </style>
