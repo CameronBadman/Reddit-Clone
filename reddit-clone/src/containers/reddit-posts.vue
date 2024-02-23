@@ -1,6 +1,5 @@
 <template>
     <div>
-        <h1>🔥🔥Hot Posts on r/{{ subreddit }}</h1>
         <div class="post-list">
             <q-infinite-scroll @load="loadMorePosts">
                 <template v-slot:loading>
@@ -32,14 +31,14 @@ export default {
     },
 
     mounted() {
-            console.log('Subreddit:', "test");
-        },
+        console.log('Subreddit:', "test");
+    },
 
     setup(props) {
         const redditPosts = ref([]);
         let loading = false; // Flag to prevent multiple concurrent requests
 
-        
+
 
         const loadMorePosts = async (index, done) => {
             if (loading) return; // Prevent concurrent requests
@@ -57,11 +56,11 @@ export default {
                 console.error('Error fetching Reddit posts:', error);
             } finally {
                 loading = false; // Reset loading flag
-                done(); // Signal that loading is complete
+                done();
             }
         };
 
-        
+
 
         return {
             redditPosts,
