@@ -1,6 +1,5 @@
 <template>
     <div>
-        <h1>🔥🔥Hot Posts on r/{{ subreddit }}</h1>
         <div class="post-list">
             <q-infinite-scroll @load="loadMorePosts">
                 <template v-slot:loading>
@@ -16,7 +15,7 @@
 </template>
 
 <script>
-import PostCard from '../components/PostCard.vue';
+import PostCard from '../components/post-card.vue';
 import { getHotRedditPosts } from '../api/reddit_api';
 import { ref } from 'vue';
 
@@ -30,9 +29,16 @@ export default {
     components: {
         PostCard
     },
+
+    mounted() {
+        console.log('Subreddit:', "test");
+    },
+
     setup(props) {
         const redditPosts = ref([]);
         let loading = false; // Flag to prevent multiple concurrent requests
+
+
 
         const loadMorePosts = async (index, done) => {
             if (loading) return; // Prevent concurrent requests
@@ -50,9 +56,11 @@ export default {
                 console.error('Error fetching Reddit posts:', error);
             } finally {
                 loading = false; // Reset loading flag
-                done(); // Signal that loading is complete
+                done();
             }
         };
+
+
 
         return {
             redditPosts,
