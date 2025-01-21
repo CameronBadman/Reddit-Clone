@@ -1,15 +1,19 @@
 # Reddit-Clone
 
+A modern, TikTok-style interface for browsing Reddit content, built with Vue.js and Quasar Framework.
 
-the problem: 
-recreat reddit - Criteria for Idea
+## 🚀 Features
 
+- Infinite scroll through Reddit posts with a TikTok-like carousel interface
+- Seamless subreddit switching via sidebar navigation
+- Reddit API integration with OAuth authentication
+- Automated OAuth token management system
+- Responsive design optimized for mobile viewing
 
-connect to reddit API 
-create a sidebar, this is where the user will be able to change subreddits
-create a infinite scroller
+## 🛠️ Tech Stack
 
-
-
-
-scrape the reddit Oauth Helper, store it in a csv with the time of the Auth, create and edit as seen 
+- **Frontend Framework:** Vue.js
+- **UI Components:** Quasar Framework
+- **API Integration:** Reddit API
+- **Authentication:** Reddit OAuth
+- **Data Storage:** CSV for token management
